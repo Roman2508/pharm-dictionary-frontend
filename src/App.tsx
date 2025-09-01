@@ -59,10 +59,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle,_rgba(0,0,0,0.15)_1px,_transparent_1px)] [background-size:16px_16px] flex justify-center py-16 px-4 overflow-hidden">
-      <div className="absolute top-2 left-4 flex items-center gap-2">
+      <div className="absolute top-1 left-4 flex items-center gap-2">
         <Logo variant="color" />
         {/* style={{ color: '#1d5d9b' }} */}
-        <div className="font-extrabold text-lg">ЖБФФК</div>
+        <div>
+          <h1 className="font-extrabold text-lg leading-none">ЖБФФК</h1>
+          <p className="text-sm opacity-[0.7]">Українсько-Латинський словник</p>
+        </div>
       </div>
 
       <Card>
