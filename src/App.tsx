@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react'
-import { Repeat as RepeatIcon } from 'lucide-react'
-import { useDebounceValue } from '@siberiacancode/reactuse'
+import { useEffect, useState } from "react";
+import { Repeat as RepeatIcon } from "lucide-react";
+import { useDebounceValue } from "@siberiacancode/reactuse";
 
-import { cn } from './lib/utils'
-import Card from './components/common/Card'
-import { Input } from './components/ui/input'
-import { Button } from './components/ui/button'
-import { UKR_ALPHABET } from './helpers/urk-alphabet'
-import { LAT_ALPHABET } from './helpers/lat-alphabet'
-import { useGetDictionaries } from './hooks/use-get-dictionaries'
+import { cn } from "./lib/utils";
+import Card from "./components/common/Card";
+import { Input } from "./components/ui/input";
+import { Button } from "./components/ui/button";
+import { UKR_ALPHABET } from "./helpers/urk-alphabet";
+import { LAT_ALPHABET } from "./helpers/lat-alphabet";
+import { useGetDictionaries } from "./hooks/use-get-dictionaries";
 // import Pagination from './components/common/Pagination'
 
-import Logo from './components/icons/logo'
+import Logo from "./components/icons/logo";
 
 type DictionaryType = {
-  id: number
-  ukrainian: string
-  latin: string
-  updatedAt: string
-  createdAt: string
-}
+  id: number;
+  ukrainian: string;
+  latin: string;
+  updatedAt: string;
+  createdAt: string;
+};
 
 // const onCreateNewDictItem = () => {
 //   axios.post(`${import.meta.env.VITE_BASE_URL}/dictionary`, {
@@ -35,30 +35,41 @@ type DictionaryType = {
 // }
 
 function App() {
-  const [translationType, setTranslationType] = useState<'uk_la' | 'la_uk'>('uk_la')
+  const [translationType, setTranslationType] = useState<"uk_la" | "la_uk">(
+    "uk_la"
+  );
 
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("");
   // const [currentPage, setCurrentPage] = useState(1)
-  const [selectedLetter, setSelectedLetter] = useState<string | null>(null)
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
 
-  const debouncedSearch = useDebounceValue(search, 500)
+  const debouncedSearch = useDebounceValue(search, 500);
 
-  const query = useGetDictionaries(translationType, selectedLetter, debouncedSearch)
+  const query = useGetDictionaries(
+    translationType,
+    selectedLetter,
+    debouncedSearch
+  );
 
   const onChangeTranslationType = () => {
-    setSelectedLetter(null)
+    setSelectedLetter(null);
     setTranslationType((prev) => {
-      if (prev === 'uk_la') return 'la_uk'
-      else return 'uk_la'
-    })
-  }
+      if (prev === "uk_la") return "la_uk";
+      else return "uk_la";
+    });
+  };
 
   useEffect(() => {
-    setSelectedLetter(null)
-  }, [debouncedSearch])
+    setSelectedLetter(null);
+  }, [debouncedSearch]);
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle,_rgba(0,0,0,0.15)_1px,_transparent_1px)] [background-size:16px_16px] flex justify-center flex-col px-4 overflow-hidden">
+    <div
+      className="min-h-screen bg-[radial-gradient(circle,_rgba(0,0,0,0.15)_1px,_transparent_1px)] [background-size:16px_16px] flex justify-center flex-col px-4 overflow-hidden"
+      // style={{
+      //   background: "linear-gradient(111.34deg, #a0bfe4 0, #07f 100%)",
+      // }}
+    >
       {/* style={{ color: '#1d5d9b' }} */}
 
       {/* <div className="absolute top-1 left-4 flex items-center gap-2">
@@ -69,9 +80,37 @@ function App() {
         </div>
       </div> */}
 
+      {/* <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 1266 900"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMax slice"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          maxHeight: "100vh",
+          overflow: "hidden",
+          color: "#fff",
+          transform: "rotate(180deg)",
+          zIndex: 0,
+        }}
+      >
+        <path
+          d="M626.614 0V484.725M626.614 484.725V900C138.607 900 1 153.071 1 0M626.614 484.725C1063.56 484.725 1159.45 175.749 1202.58 0M626.614 484.725C1011.06 484.725 1216.2 785.481 1265 900"
+          stroke="currentColor"
+          stroke-width="1.60111"
+        ></path>
+      </svg> */}
+
       <header
-        style={{ backgroundColor: '#1d5d9b' }}
-        className="mx-auto w-full max-w-3xl mb-4 px-4 flex items-center gap-2 p-2 rounded-b-sm text-white"
+        // style={{ backgroundColor: "#fff" }}
+        style={{ backgroundColor: "#1d5d9b" }}
+        className="mx-auto w-full max-w-3xl mb-4 px-4 flex items-center gap-2 p-2 rounded-b-sm text-white" // text-white
       >
         <Logo variant="color" />
         <div>
@@ -82,19 +121,30 @@ function App() {
 
       <Card>
         <div className="flex justify-between items-center gap-8 w-full flex-col-reverse md:flex-row">
-          <Input value={search} onChange={(e) => setSearch(e.target.value)} className="w-60" placeholder="Знайти..." />
+          <Input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-60"
+            placeholder="Знайти..."
+          />
 
           <div className="flex gap-2">
-            <Button variant="outline" className="w-28 cursor-default hover:bg-background">
-              {translationType === 'la_uk' ? 'Латинська' : 'Український'}
+            <Button
+              variant="outline"
+              className="w-28 cursor-default hover:bg-background"
+            >
+              {translationType === "la_uk" ? "Латинська" : "Український"}
             </Button>
 
             <Button variant="secondary" onClick={onChangeTranslationType}>
               <RepeatIcon />
             </Button>
 
-            <Button variant="outline" className="w-28 cursor-default hover:bg-background">
-              {translationType === 'la_uk' ? 'Українська' : 'Латинська'}
+            <Button
+              variant="outline"
+              className="w-28 cursor-default hover:bg-background"
+            >
+              {translationType === "la_uk" ? "Українська" : "Латинська"}
             </Button>
           </div>
         </div>
@@ -107,57 +157,78 @@ function App() {
         {/* <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} /> */}
 
         <div className="">
-          {(translationType === 'la_uk' ? LAT_ALPHABET : UKR_ALPHABET).map((letter) => (
-            <Button
-              key={letter}
-              className="w-[42px]"
-              variant={selectedLetter === letter ? 'default' : 'ghost'}
-              onClick={() => {
-                if (selectedLetter === letter) {
-                  setSelectedLetter(null)
-                } else {
-                  setSelectedLetter(letter)
-                }
-              }}
-            >
-              {letter}
-            </Button>
-          ))}
+          {(translationType === "la_uk" ? LAT_ALPHABET : UKR_ALPHABET).map(
+            (letter) => (
+              <Button
+                key={letter}
+                className="w-[42px]"
+                variant={selectedLetter === letter ? "default" : "ghost"}
+                onClick={() => {
+                  if (selectedLetter === letter) {
+                    setSelectedLetter(null);
+                  } else {
+                    setSelectedLetter(letter);
+                  }
+                }}
+              >
+                {letter}
+              </Button>
+            )
+          )}
         </div>
 
         <div className="w-full">
           <div className="grid grid-cols-2 gap-y-2 font-bold border-b">
             <div className="flex gap-4">
-              <div className="flex-1">{translationType === 'la_uk' ? 'Латинська' : 'Українська'}</div>
-              <div className="flex-1">{translationType === 'la_uk' ? 'Українська' : 'Латинська'}</div>
+              <div className="flex-1">
+                {translationType === "la_uk" ? "Латинська" : "Українська"}
+              </div>
+              <div className="flex-1">
+                {translationType === "la_uk" ? "Українська" : "Латинська"}
+              </div>
             </div>
             <div className="flex gap-4 pl-4">
               {/* <div className="flex gap-4 border-l pl-4"> */}
-              <div className="flex-1">{translationType === 'la_uk' ? 'Латинська' : 'Українська'}</div>
-              <div className="flex-1">{translationType === 'la_uk' ? 'Українська' : 'Латинська'}</div>
+              <div className="flex-1">
+                {translationType === "la_uk" ? "Латинська" : "Українська"}
+              </div>
+              <div className="flex-1">
+                {translationType === "la_uk" ? "Українська" : "Латинська"}
+              </div>
             </div>
           </div>
 
           <div className="max-h-[calc(100vh-350px)] overflow-auto">
-            {!query.isFetching && !query.data.docs.length && <p className="py-6 text-center">Нічого не знайдено</p>}
+            {!query.isFetching && !query.data.docs.length && (
+              <p className="py-6 text-center">Нічого не знайдено</p>
+            )}
 
             {query.isFetching ? (
               <p className="py-6 text-center">Завантаження...</p>
             ) : (
               <div className="grid grid-cols-2">
                 {query.data?.docs.map((dict: DictionaryType, index: number) => {
-                  const showStyle = Math.floor(index / 2) % 2 === 0
+                  const showStyle = Math.floor(index / 2) % 2 === 0;
                   return (
                     <div
                       key={dict.id}
-                      className={cn('flex gap-4 p-1 even:border-l even:pl-4', showStyle ? '' : 'bg-gray-50')}
+                      className={cn(
+                        "flex gap-4 p-1 even:border-l even:pl-4",
+                        showStyle ? "" : "bg-gray-50"
+                      )}
                     >
-                      <div className="flex-1">{translationType === 'la_uk' ? dict.latin : dict.ukrainian}</div>
+                      <div className="flex-1">
+                        {translationType === "la_uk"
+                          ? dict.latin
+                          : dict.ukrainian}
+                      </div>
                       <div className="flex-1 border-gray-300">
-                        {translationType === 'la_uk' ? dict.ukrainian : dict.latin}
+                        {translationType === "la_uk"
+                          ? dict.ukrainian
+                          : dict.latin}
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             )}
@@ -165,7 +236,7 @@ function App() {
         </div>
       </Card>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
