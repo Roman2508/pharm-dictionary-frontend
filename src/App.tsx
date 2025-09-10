@@ -4,54 +4,41 @@ import { useDebounceValue } from '@siberiacancode/reactuse'
 import Sidebar from './components/common/sidebar'
 import { Header } from './components/common/header'
 import type { TransliterationVariantsType } from './types'
+import DictionaryList from './components/common/dictionary-list'
 import { useGetDictionaries } from './hooks/use-get-dictionaries'
-import DictionaryTable from './components/common/dictionary-table'
-import DictionaryActions from './components/common/dictionary-actions'
 
 export function App() {
-  const [translationType, setTranslationType] = useState<TransliterationVariantsType>('uk_la')
-
   const [search, setSearch] = useState('')
-  const [selectedLetter, setSelectedLetter] = useState<string | null>(null)
+  const [selectedLetter, setSelectedLetter] = useState('all')
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
+  const [translationType, setTranslationType] = useState<TransliterationVariantsType>('uk_la')
 
   const debouncedSearch = useDebounceValue(search, 500)
 
-  const query = useGetDictionaries(translationType, selectedLetter, debouncedSearch)
-
-  const onChangeTranslationType = () => {
-    setSelectedLetter(null)
-    setTranslationType((prev) => {
-      if (prev === 'uk_la') return 'la_uk'
-      else return 'uk_la'
-    })
-  }
+  const query = useGetDictionaries(translationType, selectedLetter, debouncedSearch, selectedCategory)
 
   useEffect(() => {
-    setSelectedLetter(null)
+    setSelectedLetter('all')
   }, [debouncedSearch])
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+    <div>
+      <Header search={search} setSearch={setSearch} />
 
-      <main className="flex-1 p-6">
-        <div className="">
-          <Header />
-
-          <DictionaryActions
-            search={search}
-            setSearch={setSearch}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <Sidebar
             selectedLetter={selectedLetter}
             translationType={translationType}
+            selectedCategory={selectedCategory}
             setSelectedLetter={setSelectedLetter}
-            onChangeTranslationType={onChangeTranslationType}
+            setTranslationType={setTranslationType}
+            setSelectedCategory={setSelectedCategory}
           />
-        </div>
 
-        <div className="bg-white rounded-xl shadow-sm border">
-          <DictionaryTable query={query} translationType={translationType} />
+          <DictionaryList query={query} translationType={translationType} />
         </div>
-      </main>
+      </div>
     </div>
   )
 }

@@ -3,8 +3,8 @@ import { Languages as LanguagesIcon, Repeat as RepeatIcon, Search as SearchIcon 
 
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { LAT_ALPHABET } from '@/helpers/lat-alphabet'
-import { UKR_ALPHABET } from '@/helpers/urk-alphabet'
+import { LAT_ALPHABET } from '@/constants/lat-alphabet'
+import { UKR_ALPHABET } from '@/constants/urk-alphabet'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 interface Props {

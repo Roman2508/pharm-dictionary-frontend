@@ -6,4 +6,10 @@ export type DictionaryType = {
   createdAt: string
 }
 
+export type CategoryType = {
+  id: number
+  name: string
+  order: number
+}
+
 export type TransliterationVariantsType = 'uk_la' | 'la_uk'
