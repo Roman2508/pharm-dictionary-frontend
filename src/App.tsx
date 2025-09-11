@@ -23,18 +23,29 @@ export function App() {
 
   return (
     <div>
-      <Header search={search} setSearch={setSearch} />
+      <Header
+        search={search}
+        setSearch={setSearch}
+        selectedLetter={selectedLetter}
+        translationType={translationType}
+        selectedCategory={selectedCategory}
+        setSelectedLetter={setSelectedLetter}
+        setTranslationType={setTranslationType}
+        setSelectedCategory={setSelectedCategory}
+      />
 
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          <Sidebar
-            selectedLetter={selectedLetter}
-            translationType={translationType}
-            selectedCategory={selectedCategory}
-            setSelectedLetter={setSelectedLetter}
-            setTranslationType={setTranslationType}
-            setSelectedCategory={setSelectedCategory}
-          />
+          <div className="hidden lg:block">
+            <Sidebar
+              selectedLetter={selectedLetter}
+              translationType={translationType}
+              selectedCategory={selectedCategory}
+              setSelectedLetter={setSelectedLetter}
+              setTranslationType={setTranslationType}
+              setSelectedCategory={setSelectedCategory}
+            />
+          </div>
 
           <DictionaryList query={query} translationType={translationType} />
         </div>

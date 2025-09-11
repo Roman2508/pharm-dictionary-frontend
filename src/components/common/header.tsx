@@ -4,13 +4,30 @@ import { Languages, Search as SearchIcon } from 'lucide-react'
 import Logo from '../icons/logo'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import MobileFilters from './mobile-filters'
+import type { TransliterationVariantsType } from '@/types'
 
 interface Props {
   search: string
+  selectedLetter: string
+  selectedCategory: number | null
   setSearch: Dispatch<SetStateAction<string>>
+  translationType: TransliterationVariantsType
+  setSelectedLetter: Dispatch<SetStateAction<string>>
+  setSelectedCategory: Dispatch<SetStateAction<number | null>>
+  setTranslationType: Dispatch<SetStateAction<TransliterationVariantsType>>
 }
 
-const Header: FC<Props> = ({ search, setSearch }) => {
+const Header: FC<Props> = ({
+  search,
+  setSearch,
+  selectedLetter,
+  translationType,
+  selectedCategory,
+  setSelectedLetter,
+  setTranslationType,
+  setSelectedCategory,
+}) => {
   return (
     <>
       <nav className="bg-white/95 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
@@ -19,8 +36,9 @@ const Header: FC<Props> = ({ search, setSearch }) => {
             <div className="flex items-center space-x-8">
               <div className="flex items-center gap-2">
                 <Languages className="h-6 w-6 text-primary" />
-                <span className="font-bold text-lg text-foreground">PharmDictApp</span>
+                <span className="font-bold text-lg text-foreground sm:block hidden">PharmDictApp</span>
               </div>
+
               <div className="flex space-x-6">
                 <Button variant="ghost" className="text-primary font-medium hover:bg-primary/10 bg-primary/10">
                   Словник
@@ -29,6 +47,17 @@ const Header: FC<Props> = ({ search, setSearch }) => {
                   Тренажер
                 </Button>
               </div>
+            </div>
+
+            <div className="lg:hidden">
+              <MobileFilters
+                selectedLetter={selectedLetter}
+                translationType={translationType}
+                selectedCategory={selectedCategory}
+                setSelectedLetter={setSelectedLetter}
+                setTranslationType={setTranslationType}
+                setSelectedCategory={setSelectedCategory}
+              />
             </div>
           </div>
         </div>
