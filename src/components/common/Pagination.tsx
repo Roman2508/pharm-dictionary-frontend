@@ -15,8 +15,12 @@ interface Props {
   setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
-const Pagination: FC<Props> = ({ currentPage, setCurrentPage }) => {
-  const a = currentPage;
+const Pagination: FC<Props> = (
+  {
+    /* currentPage, setCurrentPage */
+  }
+) => {
+  // const a = currentPage;
   return (
     <ShadcnPagination>
       <PaginationContent>

@@ -1,9 +1,9 @@
-import type { FC } from 'react'
-import { Outlet } from 'react-router'
-import { Languages } from 'lucide-react'
+import type { FC } from "react";
+import { Outlet } from "react-router";
+import { Languages } from "lucide-react";
 
-import Logo from '@/components/icons/logo'
-import NavLinks from '@/components/common/nav-links'
+import Logo from "@/components/icons/logo";
+import NavLinks from "@/components/common/nav-links";
 
 const RootLayout: FC = () => {
   return (
@@ -13,7 +13,9 @@ const RootLayout: FC = () => {
           <div className="flex items-center justify-between lg:gap-12 lg:justify-start h-16">
             <div className="flex items-center gap-2">
               <Languages className="h-6 w-6 text-primary" />
-              <span className="font-bold text-lg text-foreground sm:block hidden">Pharm Dictionary</span>
+              <span className="font-bold text-lg text-foreground sm:block hidden">
+                Pharm Dictionary
+              </span>
             </div>
 
             <NavLinks />
@@ -41,7 +43,7 @@ const RootLayout: FC = () => {
 
       <Outlet />
     </>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;
