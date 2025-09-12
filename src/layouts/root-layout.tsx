@@ -1,19 +1,11 @@
-import type { Dispatch, FC, PropsWithChildren, ReactNode, SetStateAction } from 'react'
-import { Languages, Search as SearchIcon } from 'lucide-react'
+import type { FC } from 'react'
+import { Outlet } from 'react-router'
+import { Languages } from 'lucide-react'
 
-import Logo from '../icons/logo'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
-import { Link } from 'react-router'
-import NavLinks from './nav-links'
+import Logo from '@/components/icons/logo'
+import NavLinks from '@/components/common/nav-links'
 
-interface Props {
-  search: string
-  children?: ReactNode
-  setSearch: Dispatch<SetStateAction<string>>
-}
-
-const Header: FC<Props> = ({ search, children, setSearch }) => {
+const RootLayout: FC = () => {
   return (
     <>
       <nav className="bg-white/95 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
@@ -25,8 +17,6 @@ const Header: FC<Props> = ({ search, children, setSearch }) => {
             </div>
 
             <NavLinks />
-
-            <div className="lg:hidden">{children}</div>
           </div>
         </div>
       </nav>
@@ -45,24 +35,13 @@ const Header: FC<Props> = ({ search, children, setSearch }) => {
             <p className="text-2xl text-white/90 max-w-4xl mx-auto text-pretty">
               Латинсько-український словник фармацевтично-медичних термінів
             </p>
-
-            <div className="relative max-w-2xl mx-auto mt-8">
-              <div className="relative">
-                <SearchIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 z-[1]" />
-                <Input
-                  type="text"
-                  value={search}
-                  placeholder="Знайти..."
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="pl-12 pr-4 h-14 text-lg bg-white backdrop-blur-sm border-0 shadow-xl focus:shadow-2xl transition-all duration-300 focus:ring-4 focus:ring-white/20"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </header>
+
+      <Outlet />
     </>
   )
 }
 
-export { Header }
+export default RootLayout

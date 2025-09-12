@@ -39,7 +39,7 @@ const Filters: FC<Props> = ({
 
   const orderedCategories: CategoryType[] = useMemo(() => {
     if (!query.data) return []
-    return query.data.docs.sort((a: CategoryType, b: CategoryType) => a.order - b.order)
+    return query.data?.docs.sort((a: CategoryType, b: CategoryType) => a.order - b.order)
   }, [query.data])
 
   return (
@@ -138,7 +138,7 @@ const Filters: FC<Props> = ({
             </>
           )}
 
-          {!query.isFetching && !query.data.docs.length && <p className="text-sm">Категорії не знайдено</p>}
+          {!query.isFetching && !query.data?.docs.length && <p className="text-sm">Категорії не знайдено</p>}
         </div>
       </div>
     </>

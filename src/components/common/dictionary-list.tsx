@@ -41,7 +41,7 @@ const DictionaryList: FC<Props> = ({ query, translationType }) => {
             >
               <CardContent className="py-3 px-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                         {translationType === 'la_uk' ? 'Латинська' : 'Українська'}
