@@ -1,25 +1,27 @@
-import { useEffect, useState } from 'react'
-import { useDebounceValue } from '@siberiacancode/reactuse'
+import { useEffect, useState } from "react"
+import { useDebounceValue } from "@siberiacancode/reactuse"
 
-import Sidebar from '../components/common/sidebar'
-import { Header } from '../components/common/header'
-import type { TransliterationVariantsType } from '../types'
-import MobileFilters from '@/components/common/mobile-filters'
-import DictionaryList from '../components/common/dictionary-list'
-import { useGetDictionaries } from '../hooks/use-get-dictionaries'
+import Sidebar from "../components/common/sidebar"
+import { Header } from "../components/common/header"
+import Pagination from "@/components/common/Pagination"
+import type { TransliterationVariantsType } from "../types"
+import MobileFilters from "@/components/common/mobile-filters"
+import DictionaryList from "../components/common/dictionary-list"
+import { useGetDictionaries } from "../hooks/use-get-dictionaries"
 
 export const DictionariesPage = () => {
-  const [search, setSearch] = useState('')
-  const [selectedLetter, setSelectedLetter] = useState('all')
+  const [search, setSearch] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const [selectedLetter, setSelectedLetter] = useState("all")
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
-  const [translationType, setTranslationType] = useState<TransliterationVariantsType>('uk_la')
+  const [translationType, setTranslationType] = useState<TransliterationVariantsType>("uk_la")
 
   const debouncedSearch = useDebounceValue(search, 500)
 
-  const query = useGetDictionaries(translationType, selectedLetter, debouncedSearch, selectedCategory)
+  const query = useGetDictionaries(translationType, selectedLetter, debouncedSearch, selectedCategory, currentPage)
 
   useEffect(() => {
-    setSelectedLetter('all')
+    setSelectedLetter("all")
   }, [debouncedSearch])
 
   return (
@@ -48,7 +50,27 @@ export const DictionariesPage = () => {
             />
           </div>
 
-          <DictionaryList query={query} translationType={translationType} />
+          <div className="flex flex-col flex-1 gap-8">
+            {query.data && query.data.totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                isDisabled={query.isFetching}
+                setCurrentPage={setCurrentPage}
+                totalPages={query.data?.totalPages || 1}
+              />
+            )}
+
+            <DictionaryList query={query} translationType={translationType} />
+
+            {query.data && query.data.totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                isDisabled={query.isFetching}
+                setCurrentPage={setCurrentPage}
+                totalPages={query.data?.totalPages || 1}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

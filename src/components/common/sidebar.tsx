@@ -1,9 +1,9 @@
-import { Filter } from 'lucide-react'
-import { type Dispatch, type FC, type SetStateAction } from 'react'
+import { Filter } from "lucide-react"
+import { type Dispatch, type FC, type SetStateAction } from "react"
 
-import Filters from './filters'
-import type { TransliterationVariantsType } from '@/types'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import Filters from "./filters"
+import type { TransliterationVariantsType } from "@/types"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
 interface Props {
   selectedLetter: string
@@ -23,8 +23,8 @@ const Sidebar: FC<Props> = ({
   setSelectedCategory,
 }) => {
   return (
-    <aside className="lg:w-72">
-      <Card className="backdrop-blur-sm bg-card border shadow-xl">
+    <aside className="lg:w-72 h-full">
+      <Card className="backdrop-blur-sm bg-card border shadow-xl sticky top-23">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-card-foreground">
             <Filter className="h-5 w-5 text-primary" />

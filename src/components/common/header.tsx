@@ -4,6 +4,7 @@ import { Languages, Search as SearchIcon } from "lucide-react"
 import Logo from "../icons/logo"
 import NavLinks from "./nav-links"
 import { Input } from "../ui/input"
+import Pagination from "./Pagination"
 
 interface Props {
   search: string
