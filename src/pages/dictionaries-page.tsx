@@ -24,7 +24,7 @@ export const DictionariesPage = () => {
 
   return (
     <div>
-      <Header search={search} setSearch={setSearch}>
+      <Header search={search} setSearch={setSearch} isSearchDisable={query.isFetching}>
         <MobileFilters
           selectedLetter={selectedLetter}
           translationType={translationType}

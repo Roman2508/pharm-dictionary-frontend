@@ -1,19 +1,18 @@
-import type { Dispatch, FC, PropsWithChildren, ReactNode, SetStateAction } from 'react'
-import { Languages, Search as SearchIcon } from 'lucide-react'
+import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
+import { Languages, Search as SearchIcon } from "lucide-react"
 
-import Logo from '../icons/logo'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
-import { Link } from 'react-router'
-import NavLinks from './nav-links'
+import Logo from "../icons/logo"
+import NavLinks from "./nav-links"
+import { Input } from "../ui/input"
 
 interface Props {
   search: string
   children?: ReactNode
+  isSearchDisable?: boolean
   setSearch: Dispatch<SetStateAction<string>>
 }
 
-const Header: FC<Props> = ({ search, children, setSearch }) => {
+const Header: FC<Props> = ({ search, children, setSearch, isSearchDisable }) => {
   return (
     <>
       <nav className="bg-white/95 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
@@ -53,6 +52,7 @@ const Header: FC<Props> = ({ search, children, setSearch }) => {
                   type="text"
                   value={search}
                   placeholder="Знайти..."
+                  disabled={isSearchDisable}
                   onChange={(e) => setSearch(e.target.value)}
                   className="pl-12 pr-4 h-14 text-lg bg-white backdrop-blur-sm border-0 shadow-xl focus:shadow-2xl transition-all duration-300 focus:ring-4 focus:ring-white/20"
                 />
