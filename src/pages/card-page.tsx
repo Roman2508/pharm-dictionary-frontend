@@ -34,18 +34,18 @@ const CardPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <div className="w-lg mx-auto mb-6">
+      <div className="max-w-lg w-full mx-auto mb-6">
         <h1 className="font-bold text-2xl mb-3">{query.data?.title}</h1>
         <p className="opacity-[0.7]">{query.data?.description}</p>
       </div>
 
-      <div className="w-lg mx-auto mb-10">
+      <div className="max-w-lg w-full mx-auto mb-10">
         <SwitchLanguage translationType={translationType} setTranslationType={setTranslationType} />
       </div>
 
       <div className="flex flex-col items-center">
         {query.data?.question.map((question: ExerciseQuestionType, index: number) => (
-          <div key={question.id} className="mb-6 w-lg" onClick={() => handleFlipped(question.id)}>
+          <div key={question.id} className="mb-6 max-w-lg w-full" onClick={() => handleFlipped(question.id)}>
             <div className="h-50 cursor-pointer">
               <div
                 className={`relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] ${
