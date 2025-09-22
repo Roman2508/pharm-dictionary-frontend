@@ -1,26 +1,28 @@
-import { ChevronDown, Loader2, Repeat } from "lucide-react"
+import { ChevronDown, Loader2 } from "lucide-react"
 import { useEffect, type Dispatch, type FC, type SetStateAction } from "react"
 
 import { Button } from "../ui/button"
 import useOrder from "@/hooks/useOrder"
+import SwitchLanguage from "./switch-language"
 import CategoryButton from "../custom/category-button"
 import { LAT_ALPHABET } from "@/constants/lat-alphabet"
 import { UKR_ALPHABET } from "@/constants/urk-alphabet"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import type { CategoryType, TransliterationVariantsType } from "@/types"
 import { useGetDictionaryCategories } from "@/hooks/use-get-dictionary-categories"
-import SwitchLanguage from "./switch-language"
 
 interface Props {
   selectedLetter: string
   selectedCategory: number | null
   translationType: TransliterationVariantsType
+  setCurrentPage: Dispatch<SetStateAction<number>>
   setSelectedLetter: Dispatch<SetStateAction<string>>
   setSelectedCategory: Dispatch<SetStateAction<number | null>>
   setTranslationType: Dispatch<SetStateAction<TransliterationVariantsType>>
 }
 
 const Filters: FC<Props> = ({
+  setCurrentPage,
   selectedLetter,
   translationType,
   selectedCategory,
@@ -104,6 +106,7 @@ const Filters: FC<Props> = ({
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: "smooth" })
                   setSelectedCategory(null)
+                  setCurrentPage(1)
                 }}
               />
 
@@ -116,6 +119,7 @@ const Filters: FC<Props> = ({
                   onClick={() => {
                     window.scrollTo({ top: 0, behavior: "smooth" })
                     setSelectedCategory(category.id)
+                    setCurrentPage(1)
                   }}
                 />
               ))}

@@ -14,10 +14,11 @@ interface Props {
   totalPages: number
   currentPage: number
   isDisabled?: boolean
+  scrollToTop?: boolean
   setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
-const Pagination: FC<Props> = ({ totalPages, isDisabled, currentPage, setCurrentPage }) => {
+const Pagination: FC<Props> = ({ totalPages, scrollToTop, isDisabled, currentPage, setCurrentPage }) => {
   const createPages = () => {
     if (totalPages <= 5) {
       return Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -57,7 +58,14 @@ const Pagination: FC<Props> = ({ totalPages, isDisabled, currentPage, setCurrent
   return (
     <ShadcnPagination>
       <PaginationContent>
-        <PaginationItem onClick={() => !isDisabled && setCurrentPage((p) => Math.max(1, p - 1))}>
+        <PaginationItem
+          onClick={() => {
+            if (!isDisabled) {
+              setCurrentPage((p) => Math.max(1, p - 1))
+              scrollToTop && window.scrollTo({ top: 0, behavior: "smooth" })
+            }
+          }}
+        >
           <PaginationPrevious />
         </PaginationItem>
 
@@ -67,7 +75,13 @@ const Pagination: FC<Props> = ({ totalPages, isDisabled, currentPage, setCurrent
               <PaginationEllipsis />
             </PaginationItem>
           ) : (
-            <PaginationItem key={page} onClick={() => setCurrentPage(page)}>
+            <PaginationItem
+              key={page}
+              onClick={() => {
+                setCurrentPage(page)
+                scrollToTop && window.scrollTo({ top: 0, behavior: "smooth" })
+              }}
+            >
               <PaginationLink href="#" isActive={page === currentPage}>
                 {page}
               </PaginationLink>
@@ -75,7 +89,14 @@ const Pagination: FC<Props> = ({ totalPages, isDisabled, currentPage, setCurrent
           ),
         )}
 
-        <PaginationItem onClick={() => !isDisabled && setCurrentPage((p) => Math.min(totalPages, p + 1))}>
+        <PaginationItem
+          onClick={() => {
+            if (!isDisabled) {
+              setCurrentPage((p) => Math.min(totalPages, p + 1))
+              scrollToTop && window.scrollTo({ top: 0, behavior: "smooth" })
+            }
+          }}
+        >
           <PaginationNext />
         </PaginationItem>
       </PaginationContent>

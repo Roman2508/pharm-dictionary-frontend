@@ -28,6 +28,7 @@ export const DictionariesPage = () => {
     <div>
       <Header search={search} setSearch={setSearch} isSearchDisable={query.isFetching}>
         <MobileFilters
+          setCurrentPage={setCurrentPage}
           selectedLetter={selectedLetter}
           translationType={translationType}
           selectedCategory={selectedCategory}
@@ -41,6 +42,7 @@ export const DictionariesPage = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="hidden lg:block">
             <Sidebar
+              setCurrentPage={setCurrentPage}
               selectedLetter={selectedLetter}
               translationType={translationType}
               selectedCategory={selectedCategory}
@@ -64,6 +66,7 @@ export const DictionariesPage = () => {
 
             {query.data && query.data.totalPages > 1 && (
               <Pagination
+                scrollToTop
                 currentPage={currentPage}
                 isDisabled={query.isFetching}
                 setCurrentPage={setCurrentPage}

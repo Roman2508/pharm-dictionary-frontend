@@ -9,6 +9,7 @@ interface Props {
   selectedLetter: string
   selectedCategory: number | null
   translationType: TransliterationVariantsType
+  setCurrentPage: Dispatch<SetStateAction<number>>
   setSelectedLetter: Dispatch<SetStateAction<string>>
   setSelectedCategory: Dispatch<SetStateAction<number | null>>
   setTranslationType: Dispatch<SetStateAction<TransliterationVariantsType>>
@@ -16,6 +17,7 @@ interface Props {
 
 const Sidebar: FC<Props> = ({
   selectedLetter,
+  setCurrentPage,
   translationType,
   selectedCategory,
   setSelectedLetter,
@@ -24,7 +26,7 @@ const Sidebar: FC<Props> = ({
 }) => {
   return (
     <aside className="lg:w-72 h-full">
-      <Card className="backdrop-blur-sm bg-card border shadow-xl sticky top-23">
+      <Card className="backdrop-blur-sm bg-card border shadow-xl">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-card-foreground">
             <Filter className="h-5 w-5 text-primary" />
@@ -34,6 +36,7 @@ const Sidebar: FC<Props> = ({
 
         <CardContent className="space-y-6">
           <Filters
+            setCurrentPage={setCurrentPage}
             selectedLetter={selectedLetter}
             translationType={translationType}
             selectedCategory={selectedCategory}
