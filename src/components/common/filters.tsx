@@ -36,6 +36,7 @@ const Filters: FC<Props> = ({
 
   useEffect(() => {
     setSelectedLetter("all")
+    setCurrentPage(1)
   }, [translationType])
 
   return (
@@ -65,6 +66,7 @@ const Filters: FC<Props> = ({
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: "smooth" })
                   setSelectedLetter("all")
+                  setCurrentPage(1)
                 }}
                 className="text-xs font-medium"
               >
@@ -79,6 +81,7 @@ const Filters: FC<Props> = ({
                   onClick={() => {
                     window.scrollTo({ top: 0, behavior: "smooth" })
                     setSelectedLetter(letter)
+                    setCurrentPage(1)
                   }}
                   className="text-xs font-medium hover:scale-105 transition-transform"
                 >

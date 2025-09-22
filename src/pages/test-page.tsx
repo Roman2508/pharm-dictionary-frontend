@@ -78,8 +78,8 @@ const TestPage = () => {
   }
 
   return (
-    <div className="grid grid-cols-[50px_1fr_50px] items-baseline gap-10">
-      <div className="sticky top-20 z-10 mb-10 flex flex-col ml-4">
+    <div className="grid grid-cols-1 md:grid-cols-[50px_1fr_50px] items-baseline gap-10">
+      <div className="flex md:sticky top-20 flex-row md:flex-col gap-6 flex-wrap md:gap-0 z-10 mb-0 md:mb-10 flex flex-col p-6 pb-0 md:p-0 md:ml-4">
         {isShowResults && (
           <>
             {shaffledQuestions.map((question, index) => (
@@ -97,12 +97,12 @@ const TestPage = () => {
       </div>
 
       <div className="container mx-auto px-4 py-10">
-        <div className="w-lg mx-auto mb-6">
+        <div className="max-w-lg w-full mx-auto mb-6">
           <h1 className="font-bold text-2xl mb-3">{query.data?.title}</h1>
           <p className="opacity-[0.7]">{query.data?.description}</p>
         </div>
 
-        <div className="w-lg mx-auto mb-10">
+        <div className="max-w-lg w-full mx-auto mb-10">
           <SwitchLanguage
             translationType={translationType}
             setTranslationType={setTranslationType}
@@ -114,7 +114,7 @@ const TestPage = () => {
           {shaffledQuestions.map((question: ExerciseQuestionType, index: number) => (
             <Card
               key={question.id}
-              className="w-lg group mb-6 hover:shadow-lg transition-all duration-300 border bg-background hover:bg-card/50 cursor-pointer"
+              className="max-w-lg w-full group mb-6 hover:shadow-lg transition-all duration-300 border bg-background hover:bg-card/50 cursor-pointer"
             >
               <CardContent className="px-4 py-0">
                 <div className="space-y-4">
@@ -130,7 +130,7 @@ const TestPage = () => {
 
                   <p className="text-muted-foreground max-w-md">Виберіть правильну відповідь:</p>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {question.incorrect.map((item) => (
                       <div
                         key={item.id}
@@ -181,6 +181,7 @@ const TestPage = () => {
                 if (checkIsAllAnswered) {
                   setIsShowResults(true)
                   window.scrollTo({ top: 0, behavior: "smooth" })
+                  localStorage.removeItem("testAnswers")
                 } else {
                   toast.error("Будь ласка, дайте відповіді на всі питання перед відправкою тесту.")
                 }

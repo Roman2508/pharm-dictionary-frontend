@@ -22,11 +22,12 @@ export const DictionariesPage = () => {
 
   useEffect(() => {
     setSelectedLetter("all")
+    setCurrentPage(1)
   }, [debouncedSearch])
 
   return (
     <div>
-      <Header search={search} setSearch={setSearch} isSearchDisable={query.isFetching}>
+      <Header search={search} setSearch={setSearch}>
         <MobileFilters
           setCurrentPage={setCurrentPage}
           selectedLetter={selectedLetter}
