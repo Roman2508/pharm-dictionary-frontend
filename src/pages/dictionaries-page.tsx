@@ -21,8 +21,9 @@ export const DictionariesPage = () => {
   const query = useGetDictionaries(translationType, selectedLetter, debouncedSearch, selectedCategory, currentPage)
 
   useEffect(() => {
-    setSelectedLetter("all")
     setCurrentPage(1)
+    setSelectedLetter("all")
+    setSelectedCategory(null)
   }, [debouncedSearch])
 
   return (
